@@ -16,7 +16,7 @@ This repository provides the implementation of **KACS** (Kolmogorov-Arnold Class
 
 ## What is KACS?
 
-<img src="fig/kacs_architecture.png" width="600">
+<img src="fig/kacs_architecture.png" width="700">
 
 Traditional LCSs, including XCSF <sup><a id="ref6"></a>[[6]](#6)</sup> <sup><a id="ref7"></a>[[7]](#7)</sup>, partition the *n*-dimensional input space directly, so both rule count and parameter count grow exponentially with *n* (O(*m*ⁿ)). KACS avoids this by decomposing the target function, via the KA representation theorem, into one-dimensional inner and outer functions and assigning a dedicated one-dimensional ruleset to each — as illustrated above. This:
 
