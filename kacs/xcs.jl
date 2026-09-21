@@ -6,7 +6,7 @@
     KACS approximates a target function f(x_1, ..., x_n) using the
     Kolmogorov-Arnold representation theorem's two-stage decomposition:
 
-        f(x) ~= sum_{q=1}^{2n+1} phi_q( sum_{p=1}^{n} psi_{q,p}(x_p) )
+        f(x) = sum_{q=1}^{2n+1} phi_q( sum_{p=1}^{n} psi_{q,p}(x_p) )
 
     Each inner function psi_{q,p} and each outer function phi_q is
     represented, in turn, by its own XCS-style rule population with
