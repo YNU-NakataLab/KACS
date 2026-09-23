@@ -1,7 +1,7 @@
 # KACS: Kolmogorov-Arnold Classifier System <!-- omit in toc -->
 This repository contains the implementation for the IEEE Transactions on Evolutionary Computation article:
 
->Hiroki Shiraishi, Hisao Ishibuchi, and Masaya Nakata. **Kolmogorov-Arnold Classifier Systems as Universal Approximators**. IEEE Transactions on Evolutionary Computation, Early Access, Sep. 2026. [DOI: 10.1109/TEVC.2026.3736664](https://doi.org/10.1109/TEVC.2026.3736664).
+>Hiroki Shiraishi, Hisao Ishibuchi, and Masaya Nakata. **Kolmogorov-Arnold Classifier Systems as Universal Approximators**. IEEE Transactions on Evolutionary Computation, Early Access, Sep. 2026. [DOI: 10.1109/TEVC.2026.3736664](https://ieeexplore.ieee.org/document/11702794).
 
 This repository provides the implementation of **KACS** (Kolmogorov-Arnold Classifier System), an online evolutionary rule-based machine learning system (a.k.a. [Learning Classifier System: LCS](https://en.wikipedia.org/wiki/Learning_classifier_system) <sup><a id="ref1"></a>[[1]](#1)</sup>) for function approximation that reorganizes its rule population dimension-wise, guided by the [Kolmogorov-Arnold representation theorem](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Arnold_representation_theorem) <sup><a id="ref2"></a>[[2]](#2)</sup> <sup><a id="ref3"></a>[[3]](#3)</sup> <sup><a id="ref4"></a>[[4]](#4)</sup> <sup><a id="ref5"></a>[[5]](#5)</sup>. The implementation is written entirely in Julia, and includes a reference implementation of **XCSF** <sup><a id="ref6"></a>[[6]](#6)</sup> <sup><a id="ref7"></a>[[7]](#7)</sup>, the most widely studied LCS for function approximation, as its baseline for comparison.
 
@@ -25,13 +25,11 @@ Traditional [Learning Classifier Systems (LCSs)](https://en.wikipedia.org/wiki/L
 * Updates all rules jointly via system-level backpropagation, instead of each rule learning from its own local error as in XCSF.
 ## Kolmogorov-Arnold Representation Theorem
 
-The [Kolmogorov-Arnold representation theorem](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Arnold_representation_theorem) <sup><a id="ref2"></a>[[2]](#2)</sup> <sup><a id="ref3"></a>[[3]](#3)</sup> <sup><a id="ref4"></a>[[4]](#4)</sup> <sup><a id="ref5"></a>[[5]](#5)</sup> states that any continuous function of *n* variables can be represented *exactly* as a finite superposition of one-dimensional functions:
+The [Kolmogorov-Arnold representation theorem](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Arnold_representation_theorem) <sup><a id="ref2"></a>[[2]](#2)</sup> <sup><a id="ref3"></a>[[3]](#3)</sup> <sup><a id="ref4"></a>[[4]](#4)</sup> <sup><a id="ref5"></a>[[5]](#5)</sup> underlies the design of KACS:
 
-```math
-f(x_1,\dots,x_n) = \sum_{q=1}^{2n+1} \Phi_q\!\left(\sum_{p=1}^{n} \varphi_{q,p}(x_p)\right),
-```
+<img src="fig/theorem1.png" width="640">
 
-where ψ<sub>q,p</sub> are called *inner functions* and Φ<sub>q</sub> are called *outer functions* — only (*n*+1)(2*n*+1) one-dimensional functions in total, a quadratic rather than exponential dependence on *n*. The theorem guarantees that this decomposition *exists*, but it does not specify a unique or readily computable set of ψ and Φ; KACS instead *learns* them from data, representing each one as its own one-dimensional ruleset (see below).
+Only (*n*+1)(2*n*+1) one-dimensional functions are required in total — a quadratic, rather than exponential, dependence on *n*. The theorem guarantees that this decomposition *exists*, but it does not specify a unique or readily computable set of ψ and Φ; KACS instead *learns* them from data, representing each one as its own one-dimensional ruleset (see below).
 
 ## Brief Algorithm of KACS
 
@@ -45,13 +43,11 @@ Like XCSF, KACS learns online, one training sample at a time:
 
 ## KACS is a Universal Approximator
 
-This article proves that KACS is a universal approximator for continuous functions on compact domains — the first such proof for any LCS. Formally, let 𝒦 = [0, 1]ⁿ and let 𝓕<sub>KACS</sub> denote the set of all functions expressible by KACS models on 𝒦:
+This article proves that KACS is a universal approximator for continuous functions on compact domains — the first such proof for any LCS:
 
-```math
-\forall f \in C(\mathcal{K}),\ \forall \varepsilon>0,\ \exists\, g \in \mathcal{F}_{\text{KACS}} \text{ s.t. } \sup_{\mathbf{x}\in \mathcal{K}} |f(\mathbf{x}) - g(\mathbf{x})| < \varepsilon.
-```
+<img src="fig/theorem2.png" width="640">
 
-That is, for any continuous target function and any desired accuracy, there always exists a finite KACS model that achieves it.
+In other words, for any continuous target function and any desired accuracy, there always exists a finite KACS model that achieves it. 
 
 ## Setup and Usage Guide
 ### Requirements <!-- omit in toc -->
@@ -130,16 +126,16 @@ An example of the console log produced during training is shown below.
 
 The copyright of this KACS repository belongs to the authors in the [Evolutionary Intelligence Research Group](http://www.nkt.ynu.ac.jp/en/) (Nakata Lab) at Yokohama National University, Japan. You are free to use this code for research purposes. In such cases, we kindly request that you cite the following article:
 
->Hiroki Shiraishi, Hisao Ishibuchi, and Masaya Nakata. **Kolmogorov-Arnold Classifier Systems as Universal Approximators**. IEEE Transactions on Evolutionary Computation, Early Access, Sep. 2026. https://doi.org/10.1109/TEVC.2026.3736664.
+>Hiroki Shiraishi, Hisao Ishibuchi, and Masaya Nakata. **Kolmogorov-Arnold Classifier Systems as Universal Approximators**. IEEE Transactions on Evolutionary Computation, Early Access, Sep. 2026. [DOI: 10.1109/TEVC.2026.3736664](https://ieeexplore.ieee.org/document/11702794).
 
 ```bibtex
-@article{shiraishi2026kacs,
+@article{shiraishi2026kolmogorov,
   title   = {Kolmogorov-Arnold Classifier Systems as Universal Approximators},
   author  = {Shiraishi, Hiroki and Ishibuchi, Hisao and Nakata, Masaya},
   journal = {IEEE Transactions on Evolutionary Computation},
   year    = {2026},
   doi     = {10.1109/TEVC.2026.3736664},
-  note    = {Early access}
+  note    = {Early Access}
 }
 ```
 
