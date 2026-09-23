@@ -3,7 +3,7 @@ This repository contains the implementation for the IEEE Transactions on Evoluti
 
 >Hiroki Shiraishi, Hisao Ishibuchi, and Masaya Nakata. **Kolmogorov-Arnold Classifier Systems as Universal Approximators**. IEEE Transactions on Evolutionary Computation, Early Access, Sep. 2026. [DOI: 10.1109/TEVC.2026.3736664](https://doi.org/10.1109/TEVC.2026.3736664).
 
-This repository provides the implementation of **KACS** (Kolmogorov-Arnold Classifier System), an online evolutionary rule-based machine learning system (a.k.a. [Learning Classifier System: LCS](https://en.wikipedia.org/wiki/Learning_classifier_system) <sup><a id="ref1"></a>[[1]](#1)</sup>) for function approximation that reorganizes its rule population dimension-wise, guided by the Kolmogorov-Arnold (KA) representation theorem <sup><a id="ref2"></a>[[2]](#2)</sup> <sup><a id="ref3"></a>[[3]](#3)</sup> <sup><a id="ref4"></a>[[4]](#4)</sup> <sup><a id="ref5"></a>[[5]](#5)</sup>. The implementation is written entirely in Julia, and includes a reference implementation of **XCSF** <sup><a id="ref6"></a>[[6]](#6)</sup> <sup><a id="ref7"></a>[[7]](#7)</sup>, the most widely studied LCS for function approximation, as its baseline for comparison.
+This repository provides the implementation of **KACS** (Kolmogorov-Arnold Classifier System), an online evolutionary rule-based machine learning system (a.k.a. [Learning Classifier System: LCS](https://en.wikipedia.org/wiki/Learning_classifier_system) <sup><a id="ref1"></a>[[1]](#1)</sup>) for function approximation that reorganizes its rule population dimension-wise, guided by the [Kolmogorov-Arnold representation theorem](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Arnold_representation_theorem) <sup><a id="ref2"></a>[[2]](#2)</sup> <sup><a id="ref3"></a>[[3]](#3)</sup> <sup><a id="ref4"></a>[[4]](#4)</sup> <sup><a id="ref5"></a>[[5]](#5)</sup>. The implementation is written entirely in Julia, and includes a reference implementation of **XCSF** <sup><a id="ref6"></a>[[6]](#6)</sup> <sup><a id="ref7"></a>[[7]](#7)</sup>, the most widely studied LCS for function approximation, as its baseline for comparison.
 
 ## Table of Contents <!-- omit in toc -->
 - [What is KACS?](#what-is-kacs)
@@ -18,20 +18,20 @@ This repository provides the implementation of **KACS** (Kolmogorov-Arnold Class
 
 <img src="fig/kacs_architecture.png" width="700">
 
-Traditional LCSs, including XCSF <sup><a id="ref6"></a>[[6]](#6)</sup> <sup><a id="ref7"></a>[[7]](#7)</sup>, partition the *n*-dimensional input space directly, so both rule count and parameter count grow exponentially with *n* (O(*m*ⁿ)). KACS avoids this by decomposing the target function, via the KA representation theorem, into one-dimensional inner and outer functions and assigning a dedicated one-dimensional ruleset to each — as illustrated above. This:
+Traditional [Learning Classifier Systems (LCSs)](https://en.wikipedia.org/wiki/Learning_classifier_system) <sup><a id="ref1"></a>[[1]](#1)</sup>, including XCSF <sup><a id="ref6"></a>[[6]](#6)</sup> <sup><a id="ref7"></a>[[7]](#7)</sup>, partition the *n*-dimensional input space directly, so both rule count and parameter count grow exponentially with *n* (O(*m*ⁿ)). KACS avoids this by decomposing the target function, via the KA representation theorem, into one-dimensional inner and outer functions and assigning a dedicated one-dimensional ruleset to each — as illustrated above. This:
 
 * Reduces the worst-case rule count from O(*m*ⁿ) to O(*mn*²).
 * Cuts each rule's consequent to just **two** parameters, independent of *n*.
 * Updates all rules jointly via system-level backpropagation, instead of each rule learning from its own local error as in XCSF.
 ## Kolmogorov-Arnold Representation Theorem
 
-The KA representation theorem <sup><a id="ref2"></a>[[2]](#2)</sup> <sup><a id="ref3"></a>[[3]](#3)</sup> <sup><a id="ref4"></a>[[4]](#4)</sup> <sup><a id="ref5"></a>[[5]](#5)</sup> states that any continuous function of *n* variables can be represented *exactly* as a finite superposition of one-dimensional functions:
+The [Kolmogorov-Arnold representation theorem](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Arnold_representation_theorem) <sup><a id="ref2"></a>[[2]](#2)</sup> <sup><a id="ref3"></a>[[3]](#3)</sup> <sup><a id="ref4"></a>[[4]](#4)</sup> <sup><a id="ref5"></a>[[5]](#5)</sup> states that any continuous function of *n* variables can be represented *exactly* as a finite superposition of one-dimensional functions:
 
 ```math
 f(x_1,\dots,x_n) = \sum_{q=1}^{2n+1} \Phi_q\!\left(\sum_{p=1}^{n} \varphi_{q,p}(x_p)\right),
 ```
 
-where φ<sub>q,p</sub> are called *inner functions* and Φ<sub>q</sub> are called *outer functions* — only (*n*+1)(2*n*+1) one-dimensional functions in total, a quadratic rather than exponential dependence on *n*. The theorem guarantees that this decomposition *exists*, but it does not specify a unique or readily computable set of φ and Φ; KACS instead *learns* them from data, representing each one as its own one-dimensional ruleset (see below).
+where ψ<sub>q,p</sub> are called *inner functions* and Φ<sub>q</sub> are called *outer functions* — only (*n*+1)(2*n*+1) one-dimensional functions in total, a quadratic rather than exponential dependence on *n*. The theorem guarantees that this decomposition *exists*, but it does not specify a unique or readily computable set of ψ and Φ; KACS instead *learns* them from data, representing each one as its own one-dimensional ruleset (see below).
 
 ## Brief Algorithm of KACS
 
@@ -148,16 +148,16 @@ The copyright of this KACS repository belongs to the authors in the [Evolutionar
 [1] Ryan J. Urbanowicz and Will N. Browne. **Introduction to Learning Classifier Systems**. 1st ed. Springer Publishing Company, Incorporated, 2017. [[↑]](#ref1)
 
 <a id="2"></a>
-[2] Andrei N. Kolmogorov. "**On the representation of continuous functions of several variables by superpositions of continuous functions of a smaller number of variables**." American Mathematical Society, 1961. (English translation.) [[↑]](#ref2)
+[2] Андрей Н. Колмогоров. "**О представлении непрерывных функций нескольких переменных в виде суперпозиций непрерывных функций одного переменного и сложения**." *Доклады Академии наук*, vol. 114, no. 5, pp. 953-956, 1957. (written in Russian) [[↑]](#ref2)
 
 <a id="3"></a>
-[3] А. Н. Колмогоров. "**О представлении непрерывных функций нескольких переменных в виде суперпозиций непрерывных функций одного переменного и сложения**." *Доклады Академии наук*, vol. 114, no. 5, pp. 953-956, 1957. (Original Russian publication of [2].) [[↑]](#ref3)
+[3] Andrei N. Kolmogorov. "**On the representation of continuous functions of several variables by superpositions of continuous functions of a smaller number of variables**." American Mathematical Society, 1961. (English translation of <a id="ref2"></a>[[2]](#2)) [[↑]](#ref3)
 
 <a id="4"></a>
-[4] Vladimir I. Arnold. "**On functions of three variables**." Collected Works: Representations of Functions, Celestial Mechanics and KAM Theory, 1957-1965 (2009): 5-8. (English translation.) [[↑]](#ref4)
+[4] Владимир. И. Арнольд. "**О представлении непрерывных функций трех переменных суперпозициями непрерывных функций двух переменных**." *Математический сборник*, vol. 48(90), no. 1, pp. 3-74, 1959. (written in Russian) [[↑]](#ref4)
 
 <a id="5"></a>
-[5] В. И. Арнольд. "**О представлении непрерывных функций трех переменных суперпозициями непрерывных функций двух переменных**." *Математический сборник*, vol. 48(90), no. 1, pp. 3-74, 1959. (Original Russian publication of [4].) [[↑]](#ref5)
+[5] Vladimir I. Arnold. "**On functions of three variables**." Collected Works: Representations of Functions, Celestial Mechanics and KAM Theory, 1957-1965 (2009): 5-8. (English translation of <a id="ref4"></a>[[4]](#4)) [[↑]](#ref5)
 
 <a id="6"></a>
 [6] Stewart W. Wilson. "**Classifiers that approximate functions**." Natural Computing 1.2 (2002): 211-234. https://doi.org/10.1023/A:1016535925043 [[↑]](#ref6)
