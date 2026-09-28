@@ -11,7 +11,8 @@ This repository provides the implementation of **KACS** (Kolmogorov-Arnold Class
 - [Brief Algorithm of KACS](#brief-algorithm-of-kacs)
 - [KACS is a Universal Approximator](#kacs-is-a-universal-approximator)
 - [Setup and Usage Guide](#setup-and-usage-guide)
-- [Copyright](#copyright)
+- [Citation](#citation)
+- [Contact](#contact)
 - [References](#references)
 
 ## What is KACS?
@@ -122,9 +123,7 @@ An example of the console log produced during training is shown below.
           3        6000    0.221400    0.238600    1340.000       0.009          58
 ```
 
-## Copyright
-
-The copyright of this KACS repository belongs to the authors in the [Evolutionary Intelligence Research Group](http://www.nkt.ynu.ac.jp/en/) (Nakata Lab) at Yokohama National University, Japan. You are free to use this code for research purposes. In such cases, we kindly request that you cite the following article:
+## Citation
 
 >Hiroki Shiraishi, Hisao Ishibuchi, and Masaya Nakata. **Kolmogorov-Arnold Classifier Systems as Universal Approximators**. IEEE Transactions on Evolutionary Computation, Early Access, Sep. 2026. [DOI: 10.1109/TEVC.2026.3736664](https://ieeexplore.ieee.org/document/11702794).
 
@@ -138,6 +137,9 @@ The copyright of this KACS repository belongs to the authors in the [Evolutionar
   note    = {Early Access}
 }
 ```
+
+## Contact
+If you have any questions, please contact hiroki.shiraishi.ynu@gmail.com.
 
 ## References
 <a id="1"></a>
