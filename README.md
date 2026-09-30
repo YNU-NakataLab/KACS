@@ -1,7 +1,7 @@
 # KACS: Kolmogorov-Arnold Classifier System <!-- omit in toc -->
 This repository contains the implementation for the IEEE Transactions on Evolutionary Computation article:
 
->Hiroki Shiraishi, Hisao Ishibuchi, and Masaya Nakata. **Kolmogorov-Arnold Classifier Systems as Universal Approximators**. IEEE Transactions on Evolutionary Computation, Early Access, Sep. 2026. [DOI: 10.1109/TEVC.2026.3736664](https://ieeexplore.ieee.org/document/11702794).
+>Hiroki Shiraishi, Hisao Ishibuchi, and Masaya Nakata. **Kolmogorov-Arnold Classifier Systems as Universal Approximators**. IEEE Transactions on Evolutionary Computation, Early Access, Sep. 2026. [DOI: 10.1109/TEVC.2026.3736664](https://ieeexplore.ieee.org/document/11702794), [arXiv](https://doi.org/10.48550/arXiv.2609.37958)
 
 This repository provides the implementation of **KACS** (Kolmogorov-Arnold Classifier System), an online evolutionary rule-based machine learning system (a.k.a. [Learning Classifier System: LCS](https://en.wikipedia.org/wiki/Learning_classifier_system) <sup><a id="ref1"></a>[[1]](#1)</sup>) for function approximation that reorganizes its rule population dimension-wise, guided by the [Kolmogorov-Arnold representation theorem](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Arnold_representation_theorem) <sup><a id="ref2"></a>[[2]](#2)</sup> <sup><a id="ref3"></a>[[3]](#3)</sup> <sup><a id="ref4"></a>[[4]](#4)</sup> <sup><a id="ref5"></a>[[5]](#5)</sup>. The implementation is written entirely in Julia, and includes a reference implementation of **XCSF** <sup><a id="ref6"></a>[[6]](#6)</sup> <sup><a id="ref7"></a>[[7]](#7)</sup>, the most widely studied LCS for function approximation, as its baseline for comparison.
 
